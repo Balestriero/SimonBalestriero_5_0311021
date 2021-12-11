@@ -1,15 +1,18 @@
+// Récupération id de l'item dans l'url
 const str = window.location.href;
 const url = new URL(str);
 const itemId = url.searchParams.get("id");
 
+// Récupération du panier si existant
 let cartString = localStorage.getItem("tableau");
-
 if (cartString !== null) {
   cart = JSON.parse(cartString);
 } else {
+  // Sinon création d'un panier vide
   cart = [];
 }
 
+// Récupération de l'objet dans l'API par sa propriété id
 fetch(`//localhost:3000/api/products/${itemId}`)
   .then(function (res) {
     if (res.ok) {
@@ -121,5 +124,5 @@ fetch(`//localhost:3000/api/products/${itemId}`)
   })
 
   .catch(function (err) {
-    // Une erreur est survenue
+    alert("Erreur : " + err.message);
   });
