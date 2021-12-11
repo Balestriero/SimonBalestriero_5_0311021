@@ -4,8 +4,9 @@ let cart = JSON.parse(cartString);
 let messageEmptyCart = document.getElementById("cart__items");
 console.log(cart);
 
-// Vérification de la page affichée parce que OpenClassRooms n'est pas capable de créer un fichier HTML correct
+// Vérification de la page affichée
 const url = new URL(window.location.href);
+// Si page "cart.html" affichée
 if (url == "http://127.0.0.1:5500/front/html/cart.html") {
   getCart();
   calcQty();
@@ -14,7 +15,7 @@ if (url == "http://127.0.0.1:5500/front/html/cart.html") {
   getForm();
   postDatas();
 } else {
-  // ******* Confirmation *******
+  // Si page "confirmation.html" affichée
   function confirmation() {
     const idOfOrder = document.getElementById("orderId");
     idOfOrder.innerText = localStorage.getItem("orderId");
@@ -23,9 +24,10 @@ if (url == "http://127.0.0.1:5500/front/html/cart.html") {
   confirmation();
 }
 
-// Affichage du panier
+// ******* Affichage du panier *******
+
 function getCart() {
-  // ******* Si le panier est vide *******
+  // Si le panier est vide
   if (cart.length == 0) {
     const emptyCart = "<p>Votre panier est vide</p>";
     messageEmptyCart.innerHTML = emptyCart;
@@ -68,7 +70,6 @@ function getCart() {
       let itemColor = document.createElement("p");
       itemName.appendChild(itemColor);
       itemColor.innerHTML = cart[item].couleur;
-      // itemColor.style.fontSize = "20px";
 
       // // Insertion du prix
       let itemPrice = document.createElement("p");
@@ -117,6 +118,7 @@ function getCart() {
 }
 
 // ******* Calcul du prix *******
+
 function calcQty() {
   // Récupération du total des quantités
   let itemQuantity = document.getElementsByClassName("itemQuantity");
@@ -144,6 +146,7 @@ function calcQty() {
 }
 
 // ******* Modification des quantités *******
+
 function modifyQty() {
   let qtyModif = document.getElementsByClassName("itemQuantity");
 
@@ -172,6 +175,7 @@ function modifyQty() {
 }
 
 // ******* Suppression d'un item *******
+
 function deleteItem() {
   let deleteBtn = document.getElementsByClassName("deleteItem");
 
@@ -344,6 +348,7 @@ function postDatas() {
     };
     console.log(orderToServer);
 
+    // Envoi de la commande au server + récupération du numéro de commande
     fetch("//localhost:3000/api/products/order", {
       method: "POST",
       headers: {

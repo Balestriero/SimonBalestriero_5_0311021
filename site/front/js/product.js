@@ -114,11 +114,9 @@ fetch(`//localhost:3000/api/products/${itemId}`)
       console.log(cart);
 
       // Ajout du tableau au localstorage
-
       let cartString = JSON.stringify(cart);
       localStorage.setItem("tableau", cartString);
       console.log(cartString);
-
       //   window.open("cart.html");
     });
   })
