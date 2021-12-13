@@ -4,26 +4,6 @@ let cart = JSON.parse(cartString);
 let messageEmptyCart = document.getElementById("cart__items");
 console.log(cart);
 
-// Vérification de la page affichée
-const url = new URL(window.location.href);
-// Si page "cart.html" affichée
-if (url == "http://127.0.0.1:5500/front/html/cart.html") {
-  getCart();
-  calcQty();
-  modifyQty();
-  deleteItem();
-  getForm();
-  postDatas();
-} else {
-  // Si page "confirmation.html" affichée
-  function confirmation() {
-    const idOfOrder = document.getElementById("orderId");
-    idOfOrder.innerText = localStorage.getItem("orderId");
-    localStorage.clear();
-  }
-  confirmation();
-}
-
 // ******* Affichage du panier *******
 
 function getCart() {
@@ -366,4 +346,25 @@ function postDatas() {
         alert("Erreur " + err.message);
       });
   });
+}
+
+function confirmation() {
+  const idOfOrder = document.getElementById("orderId");
+  idOfOrder.innerText = localStorage.getItem("orderId");
+  localStorage.clear();
+}
+
+// Vérification de la page affichée
+const url = new URL(window.location.href);
+// Si page "cart.html" affichée
+if (url == "http://127.0.0.1:5500/front/html/cart.html") {
+  getCart();
+  calcQty();
+  modifyQty();
+  deleteItem();
+  getForm();
+  postDatas();
+} else {
+  // Si page "confirmation.html" affichée
+  confirmation();
 }
